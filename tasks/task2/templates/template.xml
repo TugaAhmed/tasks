@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data> 
+
+    <template id="payment_inherit" inherit_id="website_sale.payment">
+        <xpath expr="//div[@id='wrap']/div/div" position='inside'>
+            <input type="text" type="hidden" name="message" id='message' t-att-value='message'/>
+        </xpath>
+
+        <xpath expr="//div[@id='wrap']/div/div/div[hasclass('oe_cart')]/div[hasclass('js_payment')]" position='replace'>
+             <script>
+
+                      function myFunction() {
+                        var message = document.forms["myForm"]["message"].value;
+                        console.log(inpobj.value());
+                          if (message == "invalid zip code") {
+                            alert("invalid zip code");
+                            return false;
+                          }
+                          if (message == "city zipcode do not match") {
+                            alert("city zipcode do not match");
+                            return false;
+                          }
+                           if (message == "bad request") {
+                            alert("bad request");
+                            return false;
+                          }
+                      }
+
+                    });
+
+                                 
+
+            </script>
+            <div class="js_payment mt-3" t-if="not website_sale_order.amount_total" id="payment_method">
+                <form target="_self" action="/shop/payment/validate" method="post" class="float-right" name="myForm" onsubmit="return myFunction()">
+
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                    <a  id='target' role="button" class="btn btn-primary a-submit" href="#">
+                        <span t-if="order.amount_total &gt; 0">Pay now <span class="fa fa-chevron-right"></span></span>
+                        <span t-if="order.amount_total == 0">Confirm Order <span class="fa fa-chevron-right"></span></span>
+                    </a>
+                </form>
+            </div>
+        </xpath>
+
+        </template> 
+    </data>
+</odoo>
