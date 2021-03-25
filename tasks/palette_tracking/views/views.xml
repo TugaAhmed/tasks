@@ -24,6 +24,7 @@
            <field name="res_model">pallet.tracking</field>
            <field name="view_mode">tree,form</field>
            <field name="domain">[('partner_id', '=', active_id)]</field>
+           <field name="context">{'default_partner_id' : active_id}</field>
     </record>
 
        <record id="view_partner_form_inherit" model="ir.ui.view">
