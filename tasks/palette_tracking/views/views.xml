@@ -32,13 +32,13 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <data>
-                    <xpath expr="//sheet" position='inside'>
-                        <div class="oe_button_box" name="button_box">
-                            <button  type="Action" attrs="{'invisible' : [('company_type','!=','company')]}"
+                    <xpath expr="//div[@name='button_box']" position='inside'>
+                      
+                            <button  type="action" attrs="{'invisible' : [('company_type','!=','company')]}"
                                     name="%(pallet_tracking_action)d">
-                                    <center style="color:green ; font-size : 10px">Pallet Tracking</center>
+                                    <center style="color:green ; font-size : 15px">Pallet Tracking</center>
                             </button>
-                        </div>
+                      
                     </xpath>
                 </data>
             </field>
