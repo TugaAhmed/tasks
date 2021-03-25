@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="pallet_tracking_tree_view" model="ir.ui.view">
+            <field name="name">pallet.tracking.tree.viiew</field>
+            <field name="model">pallet.tracking</field>
+            <field name="arch" type="xml">
+                <tree string="Pallet Tracking">
+                    <field name='partner_id' invisible='1'/>
+                    <field name='picking_id'/>
+                    <field name='license_plate'/>
+                    <field name='picking_partner_id'/>
+                    <field name='picking_date_done'/>
+                    <field name='pallet_count_plus'/>
+                    <field name='pallet_count_minus'/>
+                    <field name='balance'/>
+
+                </tree>
+            </field>
+    </record>
+
+    <record id="pallet_tracking_action" model="ir.actions.act_window">
+           <field name="name">Pallet Tracking</field>
+           <field name="res_model">pallet.tracking</field>
+           <field name="view_mode">tree,form</field>
+           <field name="domain">[('partner_id', '=', active_id)]</field>
+    </record>
+
+       <record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">view.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//sheet" position='inside'>
+                        <div class="oe_button_box" name="button_box">
+                            <button  type="Action" attrs="{'invisible' : [('company_type','!=','company')]}"
+                                    name="%(pallet_tracking_action)d">
+                                    <center style="color:green ; font-size : 10px">Pallet Tracking</center>
+                            </button>
+                        </div>
+                    </xpath>
+                </data>
+            </field>
+    </record>   
+
+</odoo>
